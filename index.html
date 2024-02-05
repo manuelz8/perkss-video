@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="video-container">
+        <video id="video" autoplay muted playsinline>
+            <source src="assets/landing-video.MOV" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+    </div>
+
+    <div id="overlay">
+        <a href="https://play.google.com/store/apps/details?id=io.perkss&hl=es_419&gl=US&pli=1" class="download-btn"><img src="assets/play-store.png" alt="Button"></a>
+        <a href="https://apps.apple.com/es/app/perkss/id6448196063?l=en-GB" class="download-btn"><img src="assets/app-store.png" alt="Button"></a>
+    </div>
+</div>
+
+<script>
+    const video = document.getElementById('video');
+    const overlay = document.getElementById('overlay');
+
+    video.addEventListener('ended', () => {
+        // Oculta el video y muestra la sección de overlay
+        video.style.display = 'none';
+        overlay.style.opacity = 1;
+    });
+</script>
+</body>
