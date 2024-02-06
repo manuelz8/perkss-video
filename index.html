@@ -12,6 +12,7 @@
             <source src="assets/landing-video.MOV" type="video/mp4">
             Tu navegador no soporta el elemento de video.
         </video>
+        <span class="sound-on"><img src="assets/sound.png" alt="Sonido"></span>
     </div>
 
     <div id="overlay">
@@ -25,9 +26,30 @@
     const overlay = document.getElementById('overlay');
 
     video.addEventListener('ended', () => {
-        // Oculta el video y muestra la sección de overlay
+        // Oculta el video y muestra la sección de overlay con el efecto de barrido
         video.style.display = 'none';
-        overlay.style.opacity = 1;
+
+        // Aplica transformación según el ancho de la pantalla
+        if (window.innerWidth > 720) {
+            overlay.style.transform = 'translate(-50%, 0)';
+        } else {
+            overlay.style.transform = 'translateY(0)';
+        }
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    var video = document.getElementById('video');
+    var soundOnButton = document.querySelector('.sound-on');
+
+    soundOnButton.addEventListener('click', function() {
+        // Cambia el estado 'muted' del video
+        video.muted = !video.muted;
+
+        // Oculta el botón de sonido si el video ya no está en modo silencioso
+        if (!video.muted) {
+            soundOnButton.style.display = 'none';
+        }
+    });
+});
 </script>
 </body>
