@@ -39,9 +39,10 @@
 
     document.addEventListener('DOMContentLoaded', function() {
     var video = document.getElementById('video');
+    var videoContainer = document.getElementById('video-container');
     var soundOnButton = document.querySelector('.sound-on');
 
-    soundOnButton.addEventListener('click', function() {
+    videoContainer.addEventListener('click', function() {
         // Cambia el estado 'muted' del video
         video.muted = !video.muted;
 
