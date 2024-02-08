@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
 </head>
 <body>
     <div id="video-container">
@@ -15,42 +18,55 @@
         <span class="sound-on"><img src="assets/sound.png" alt="Sonido"></span>
     </div>
 
-    <div id="overlay">
+    <div id="overlay" class="hidden">
         <a href="https://play.google.com/store/apps/details?id=io.perkss&hl=es_419&gl=US&pli=1" class="download-btn"><img src="assets/play-store.png" alt="Button"></a>
         <a href="https://apps.apple.com/es/app/perkss/id6448196063?l=en-GB" class="download-btn"><img src="assets/app-store.png" alt="Button"></a>
     </div>
-</div>
 
-<script>
-    const video = document.getElementById('video');
-    const overlay = document.getElementById('overlay');
+    <script>
 
-    video.addEventListener('ended', () => {
-        // Oculta el video y muestra la sección de overlay con el efecto de barrido
-        video.style.display = 'none';
+$(document).ready(function () {
+            var video = document.getElementById('video');
+            var overlay = $('#overlay');
+            var downloadButtons = $('.download-btn');
 
-        // Aplica transformación según el ancho de la pantalla
-        if (window.innerWidth > 720) {
-            overlay.style.transform = 'translate(-50%, 0)';
-        } else {
-            overlay.style.transform = 'translateY(0)';
-        }
-    });
+            video.addEventListener('ended', function () {
+                // Muestra y desplaza el overlay hacia abajo para cubrir el video
+                anime({
+                    targets: '#overlay',
+                    top: '0',
+                    easing: 'easeInOutQuad',
+                    duration: 500,
+                    complete: function () {
+                        // Después de completar la transición del overlay, muestra los botones con una transición easeIn
+                        downloadButtons.css({ opacity: 1, transform: 'translateY(0)' });
+                    }
+                });
 
-    document.addEventListener('DOMContentLoaded', function() {
-    var video = document.getElementById('video');
-    var videoContainer = document.getElementById('video-container');
-    var soundOnButton = document.querySelector('.sound-on');
+                // Después de completar la transición, oculta el video
+                setTimeout(function () {
+                    video.style.display = 'none';
+                }, 2000);
+            });
+        });
 
-    videoContainer.addEventListener('click', function() {
-        // Cambia el estado 'muted' del video
-        video.muted = !video.muted;
 
-        // Oculta el botón de sonido si el video ya no está en modo silencioso
-        if (!video.muted) {
-            soundOnButton.style.display = 'none';
-        }
-    });
-});
-</script>
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var video = document.getElementById('video');
+            var soundOnButton = document.querySelector('.sound-on');
+
+            soundOnButton.addEventListener('click', function () {
+                // Cambia el estado 'muted' del video
+                video.muted = !video.muted;
+
+                // Oculta el botón de sonido si el video ya no está en modo silencioso
+                if (!video.muted) {
+                    soundOnButton.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
+</html>
