@@ -35,7 +35,7 @@
                     targets: '#overlay',
                     top: '0',
                     easing: 'easeInOutQuad',
-                    duration: 300,
+                    duration: 100,
                     complete: function () {
                         // Después de completar la transición del overlay, muestra los botones con una transición easeIn
                         downloadButtons.css({ opacity: 1, transform: 'translateY(0)' });
@@ -45,7 +45,7 @@
                 // Después de completar la transición, oculta el video
                 setTimeout(function () {
                     video.style.display = 'none';
-                }, 500);
+                }, 1000);
             });
 
             soundOnButton.addEventListener('click', function () {
